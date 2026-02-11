@@ -1,921 +1,255 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>gc0shop.com - Tienda de Gorras Online</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            background-color: #f8f9fa;
-            color: #333;
-        }
-
-        /* Header y navegación */
-        header {
-            background-color: #1a1a1a;
-            color: white;
-            padding: 15px 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
-
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 28px;
-            font-weight: 700;
-            color: #ff3c00;
-            text-decoration: none;
-        }
-
-        .logo span {
-            color: white;
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-        }
-
-        .nav-links li {
-            margin-left: 25px;
-        }
-
-        .nav-links a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 16px;
-            transition: color 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: #ff3c00;
-        }
-
-        .nav-icons {
-            display: flex;
-            align-items: center;
-        }
-
-        .nav-icons i {
-            font-size: 20px;
-            margin-left: 20px;
-            cursor: pointer;
-            transition: color 0.3s;
-        }
-
-        .nav-icons i:hover {
-            color: #ff3c00;
-        }
-
-        .cart-count {
-            background-color: #ff3c00;
-            color: white;
-            border-radius: 50%;
-            font-size: 12px;
-            padding: 2px 6px;
-            position: relative;
-            top: -8px;
-            left: -8px;
-        }
-
-        .menu-toggle {
-            display: none;
-            font-size: 24px;
-            cursor: pointer;
-        }
-
-        /* Banner principal */
-        .banner {
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1521369909029-2afed882baee?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80');
-            background-size: cover;
-            background-position: center;
-            color: white;
-            text-align: center;
-            padding: 100px 0;
-            margin-bottom: 40px;
-        }
-
-        .banner h1 {
-            font-size: 48px;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-        }
-
-        .banner p {
-            font-size: 20px;
-            margin-bottom: 30px;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .btn {
-            display: inline-block;
-            background-color: #ff3c00;
-            color: white;
-            padding: 12px 30px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 16px;
-            transition: all 0.3s;
-            border: none;
-            cursor: pointer;
-        }
-
-        .btn:hover {
-            background-color: #e03500;
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(255, 60, 0, 0.2);
-        }
-
-        /* Filtros de productos */
-        .filters {
-            background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            margin-bottom: 30px;
-        }
-
-        .filters h2 {
-            margin-bottom: 20px;
-            font-size: 22px;
-            color: #1a1a1a;
-        }
-
-        .filter-options {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-
-        .filter-option {
-            background-color: #f8f9fa;
-            padding: 8px 20px;
-            border-radius: 30px;
-            cursor: pointer;
-            transition: all 0.3s;
-            border: 1px solid #e0e0e0;
-        }
-
-        .filter-option:hover, .filter-option.active {
-            background-color: #ff3c00;
-            color: white;
-            border-color: #ff3c00;
-        }
-
-        /* Productos */
-        .products-section {
-            margin-bottom: 60px;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 40px;
-            font-size: 32px;
-            color: #1a1a1a;
-            position: relative;
-        }
-
-        .section-title:after {
-            content: '';
-            position: absolute;
-            width: 80px;
-            height: 4px;
-            background-color: #ff3c00;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 30px;
-        }
-
-        .product-card {
-            background-color: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .product-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-        }
-
-        .product-img {
-            width: 100%;
-            height: 250px;
-            object-fit: cover;
-        }
-
-        .product-info {
-            padding: 20px;
-        }
-
-        .product-title {
-            font-size: 18px;
-            margin-bottom: 10px;
-            color: #1a1a1a;
-        }
-
-        .product-price {
-            font-size: 22px;
-            font-weight: 700;
-            color: #ff3c00;
-            margin-bottom: 15px;
-        }
-
-        .original-price {
-            text-decoration: line-through;
-            color: #999;
-            font-size: 18px;
-            margin-left: 10px;
-            font-weight: normal;
-        }
-
-        .product-rating {
-            color: #ffc107;
-            margin-bottom: 15px;
-        }
-
-        .add-to-cart {
-            width: 100%;
-            padding: 12px;
-            background-color: #1a1a1a;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .add-to-cart:hover {
-            background-color: #ff3c00;
-        }
-
-        /* Ofertas especiales */
-        .special-offers {
-            background-color: #1a1a1a;
-            color: white;
-            padding: 60px 0;
-            margin-bottom: 60px;
-        }
-
-        .offer-content {
-            text-align: center;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .offer-content h2 {
-            font-size: 36px;
-            margin-bottom: 20px;
-        }
-
-        .offer-content p {
-            font-size: 18px;
-            margin-bottom: 30px;
-            line-height: 1.6;
-        }
-
-        /* Footer */
-        footer {
-            background-color: #1a1a1a;
-            color: white;
-            padding: 60px 0 30px;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            margin-bottom: 40px;
-        }
-
-        .footer-column h3 {
-            font-size: 20px;
-            margin-bottom: 20px;
-            color: #ff3c00;
-        }
-
-        .footer-column ul {
-            list-style: none;
-        }
-
-        .footer-column ul li {
-            margin-bottom: 10px;
-        }
-
-        .footer-column ul li a {
-            color: #ccc;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        .footer-column ul li a:hover {
-            color: #ff3c00;
-        }
-
-        .social-icons {
-            display: flex;
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        .social-icons a {
-            color: white;
-            font-size: 20px;
-            transition: color 0.3s;
-        }
-
-        .social-icons a:hover {
-            color: #ff3c00;
-        }
-
-        .copyright {
-            text-align: center;
-            padding-top: 30px;
-            border-top: 1px solid #333;
-            color: #999;
-            font-size: 14px;
-        }
-
-        /* Modal del carrito */
-        .cart-modal {
-            position: fixed;
-            top: 0;
-            right: -400px;
-            width: 380px;
-            height: 100vh;
-            background-color: white;
-            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
-            transition: right 0.5s;
-            z-index: 1000;
-            overflow-y: auto;
-        }
-
-        .cart-modal.active {
-            right: 0;
-        }
-
-        .cart-header {
-            background-color: #1a1a1a;
-            color: white;
-            padding: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .close-cart {
-            font-size: 24px;
-            cursor: pointer;
-            transition: color 0.3s;
-        }
-
-        .close-cart:hover {
-            color: #ff3c00;
-        }
-
-        .cart-items {
-            padding: 20px;
-        }
-
-        .cart-item {
-            display: flex;
-            margin-bottom: 20px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid #eee;
-        }
-
-        .cart-item-img {
-            width: 80px;
-            height: 80px;
-            object-fit: cover;
-            border-radius: 5px;
-            margin-right: 15px;
-        }
-
-        .cart-item-info h4 {
-            margin-bottom: 5px;
-            font-size: 16px;
-        }
-
-        .cart-item-price {
-            color: #ff3c00;
-            font-weight: 700;
-            margin-bottom: 10px;
-        }
-
-        .cart-item-actions {
-            display: flex;
-            align-items: center;
-        }
-
-        .cart-item-actions button {
-            background-color: #f8f9fa;
-            border: 1px solid #ddd;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-weight: bold;
-        }
-
-        .cart-item-actions span {
-            margin: 0 10px;
-            font-weight: 600;
-        }
-
-        .cart-total {
-            padding: 20px;
-            border-top: 1px solid #eee;
-            display: flex;
-            justify-content: space-between;
-            font-size: 20px;
-            font-weight: 700;
-            color: #1a1a1a;
-        }
-
-        .checkout-btn {
-            width: calc(100% - 40px);
-            margin: 0 20px 20px;
-        }
-
-        /* Responsive */
-        @media (max-width: 992px) {
-            .nav-links {
-                display: none;
-            }
-            
-            .menu-toggle {
-                display: block;
-            }
-            
-            .banner h1 {
-                font-size: 36px;
-            }
-            
-            .banner p {
-                font-size: 18px;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .products-grid {
-                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            }
-            
-            .cart-modal {
-                width: 100%;
-                right: -100%;
-            }
-            
-            .filter-options {
-                justify-content: center;
-            }
-        }
-
-        @media (max-width: 576px) {
-            .banner {
-                padding: 70px 0;
-            }
-            
-            .banner h1 {
-                font-size: 28px;
-            }
-            
-            .section-title {
-                font-size: 26px;
-            }
-            
-            .offer-content h2 {
-                font-size: 28px;
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>gc0shop.com - Tienda de Gorras Online</title>
+  <meta name="description" content="Tienda online de gorras con las mejores marcas y diseños. Ofertas, novedades y envíos a todo México. Compra tu gorra en gc0shop." />
+
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <link rel="stylesheet" href="./styles.css" />
 </head>
 <body>
-    <!-- Header y navegación -->
-    <header>
-        <div class="container nav-container">
-            <a href="#" class="logo">gc0<span>shop</span></a>
-            
-            <ul class="nav-links">
-                <li><a href="#">Inicio</a></li>
-                <li><a href="#products">Gorras</a></li>
-                <li><a href="#">Novedades</a></li>
-                <li><a href="#">Ofertas</a></li>
-                <li><a href="#">Contacto</a></li>
-            </ul>
-            
-            <div class="nav-icons">
-                <i class="fas fa-search"></i>
-                <i class="fas fa-user"></i>
-                <i class="fas fa-shopping-cart" id="cart-icon"></i>
-                <span class="cart-count">2</span>
-            </div>
-            
-            <div class="menu-toggle">
-                <i class="fas fa-bars"></i>
-            </div>
-        </div>
-    </header>
 
-    <!-- Banner principal -->
-    <section class="banner">
-        <div class="container">
-            <h1>Gorras de las Mejores Marcas</h1>
-            <p>Encuentra tu estilo con nuestra colección exclusiva de gorras. Desde diseños clásicos hasta las últimas tendencias, tenemos la gorra perfecta para ti.</p>
-            <a href="#products" class="btn">Ver Colección</a>
-        </div>
-    </section>
+  <!-- Header y navegación -->
+  <header class="site-header">
+    <div class="container nav-container">
+      <a href="#" class="brand" aria-label="Ir a inicio">
+        <img class="brand-logo" src="./logo.avif" alt="gc0shop" width="36" height="36">
+        <span class="brand-text">gc0<span>shop</span></span>
+      </a>
 
-    <!-- Filtros de productos -->
-    <section class="container">
-        <div class="filters">
-            <h2>Filtrar por categoría:</h2>
-            <div class="filter-options">
-                <div class="filter-option active">Todas</div>
-                <div class="filter-option">Deportivas</div>
-                <div class="filter-option">Ajustables</div>
-                <div class="filter-option">Snapback</div>
-                <div class="filter-option">Plana</div>
-                <div class="filter-option">New Era</div>
-            </div>
-        </div>
-    </section>
+      <nav class="site-nav" aria-label="Navegación principal">
+        <ul class="nav-links" id="nav-links">
+          <li><a href="#">Inicio</a></li>
+          <li><a href="#products">Gorras</a></li>
+          <li><a href="#novedades">Novedades</a></li>
+          <li><a href="#ofertas">Ofertas</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+      </nav>
 
-    <!-- Productos -->
-    <section class="container products-section" id="products">
-        <h2 class="section-title">Nuestras Gorras</h2>
-        
-        <div class="products-grid">
-            <!-- Producto 1 -->
-            <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1588850561407-ed78c282e89b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=736&q=80" alt="Gorra Negra Clásica" class="product-img">
-                <div class="product-info">
-                    <h3 class="product-title">Gorra Negra Clásica</h3>
-                    <div class="product-rating">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star-half-alt"></i>
-                    </div>
-                    <div class="product-price">$299 <span class="original-price">$499</span></div>
-                    <button class="add-to-cart" data-id="1">Añadir al carrito</button>
-                </div>
-            </div>
-            
-            <!-- Producto 2 -->
-            <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1576871337632-b9aef4c17ab9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Gorra Roja Deportiva" class="product-img">
-                <div class="product-info">
-                    <h3 class="product-title">Gorra Roja Deportiva</h3>
-                    <div class="product-rating">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="far fa-star"></i>
-                    </div>
-                    <div class="product-price">$349 <span class="original-price">$549</span></div>
-                    <button class="add-to-cart" data-id="2">Añadir al carrito</button>
-                </div>
-            </div>
-            
-            <!-- Producto 3 -->
-            <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Gorra Azul Snapback" class="product-img">
-                <div class="product-info">
-                    <h3 class="product-title">Gorra Azul Snapback</h3>
-                    <div class="product-rating">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <div class="product-price">$399</div>
-                    <button class="add-to-cart" data-id="3">Añadir al carrito</button>
-                </div>
-            </div>
-            
-            <!-- Producto 4 -->
-            <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1588850561407-ed78c282e89b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=736&q=80" alt="Gorra Verde Militar" class="product-img">
-                <div class="product-info">
-                    <h3 class="product-title">Gorra Verde Militar</h3>
-                    <div class="product-rating">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star-half-alt"></i>
-                        <i class="far fa-star"></i>
-                    </div>
-                    <div class="product-price">$279 <span class="original-price">$399</span></div>
-                    <button class="add-to-cart" data-id="4">Añadir al carrito</button>
-                </div>
-            </div>
-            
-            <!-- Producto 5 -->
-            <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1576871337632-b9aef4c17ab9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Gorra Beisbolera Negra" class="product-img">
-                <div class="product-info">
-                    <h3 class="product-title">Gorra Beisbolera Negra</h3>
-                    <div class="product-rating">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="far fa-star"></i>
-                    </div>
-                    <div class="product-price">$449</div>
-                    <button class="add-to-cart" data-id="5">Añadir al carrito</button>
-                </div>
-            </div>
-            
-            <!-- Producto 6 -->
-            <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Gorra Blanca con Logo" class="product-img">
-                <div class="product-info">
-                    <h3 class="product-title">Gorra Blanca con Logo</h3>
-                    <div class="product-rating">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star-half-alt"></i>
-                    </div>
-                    <div class="product-price">$329 <span class="original-price">$449</span></div>
-                    <button class="add-to-cart" data-id="6">Añadir al carrito</button>
-                </div>
-            </div>
-        </div>
-    </section>
+      <div class="nav-icons">
+        <button class="icon-btn" type="button" aria-label="Buscar">
+          <i class="fas fa-search" aria-hidden="true"></i>
+        </button>
 
-    <!-- Ofertas especiales -->
-    <section class="special-offers">
-        <div class="container offer-content">
-            <h2>¡Hasta 50% de descuento en gorras seleccionadas!</h2>
-            <p>No te pierdas nuestras ofertas especiales. Por tiempo limitado, obtén descuentos increíbles en las mejores marcas de gorras. Oferta válida hasta agotar existencias.</p>
-            <a href="#products" class="btn">Ver Ofertas</a>
-        </div>
-    </section>
+        <button class="icon-btn" type="button" aria-label="Cuenta">
+          <i class="fas fa-user" aria-hidden="true"></i>
+        </button>
 
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>Gorras Estilo</h3>
-                    <p>Tu tienda online de gorras con las mejores marcas y diseños. Envíos a todo México.</p>
-                    <div class="social-icons">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-tiktok"></i></a>
-                    </div>
-                </div>
-                
-                <div class="footer-column">
-                    <h3>Categorías</h3>
-                    <ul>
-                        <li><a href="#">Gorras Deportivas</a></li>
-                        <li><a href="#">Gorras Ajustables</a></li>
-                        <li><a href="#">Gorras Snapback</a></li>
-                        <li><a href="#">Gorras Plana</a></li>
-                        <li><a href="#">Gorras New Era</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-column">
-                    <h3>Ayuda</h3>
-                    <ul>
-                        <li><a href="#">Preguntas Frecuentes</a></li>
-                        <li><a href="#">Envíos y Entregas</a></li>
-                        <li><a href="#">Devoluciones</a></li>
-                        <li><a href="#">Guía de Tallas</a></li>
-                        <li><a href="#">Contacto</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-column">
-                    <h3>Contacto</h3>
-                    <ul>
-                        <li><i class="fas fa-map-marker-alt"></i> Av. Insurgentes 123, CDMX</li>
-                        <li><i class="fas fa-phone"></i> (55) 1234-5678</li>
-                        <li><i class="fas fa-envelope"></i> info@gc0shop.com</li>
-                        <li><i class="fas fa-clock"></i> Lunes a Viernes: 9am - 7pm</li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="copyright">
-                <p>&copy; 2026 gc0shop.com Todos los derechos reservados.</p>
-            </div>
-        </div>
-    </footer>
+        <button class="icon-btn cart-btn" type="button" id="cart-icon" aria-label="Abrir carrito">
+          <i class="fas fa-shopping-cart" aria-hidden="true"></i>
+          <span class="cart-count" id="cart-count" aria-label="Artículos en carrito">0</span>
+        </button>
 
-    <!-- Modal del carrito -->
-    <div class="cart-modal" id="cart-modal">
-        <div class="cart-header">
-            <h3>Tu Carrito</h3>
-            <div class="close-cart" id="close-cart">&times;</div>
+        <button class="icon-btn menu-toggle" type="button" id="menu-toggle"
+          aria-label="Abrir menú" aria-controls="nav-links" aria-expanded="false">
+          <i class="fas fa-bars" aria-hidden="true"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Banner -->
+  <section class="banner">
+    <div class="container">
+      <h1>Gorras de las Mejores Marcas</h1>
+      <p>Encuentra tu estilo con nuestra colección exclusiva de gorras. Desde diseños clásicos hasta las últimas tendencias, tenemos la gorra perfecta para ti.</p>
+      <a href="#products" class="btn">Ver Colección</a>
+    </div>
+  </section>
+
+  <!-- Filtros -->
+  <section class="container" aria-label="Filtros">
+    <div class="filters">
+      <h2>Filtrar por categoría:</h2>
+      <div class="filter-options" role="tablist" aria-label="Categorías">
+        <button class="filter-option active" type="button" data-filter="all" role="tab" aria-selected="true">Todas</button>
+        <button class="filter-option" type="button" data-filter="deportivas" role="tab" aria-selected="false">Deportivas</button>
+        <button class="filter-option" type="button" data-filter="ajustables" role="tab" aria-selected="false">Ajustables</button>
+        <button class="filter-option" type="button" data-filter="snapback" role="tab" aria-selected="false">Snapback</button>
+        <button class="filter-option" type="button" data-filter="plana" role="tab" aria-selected="false">Plana</button>
+        <button class="filter-option" type="button" data-filter="newera" role="tab" aria-selected="false">New Era</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Productos -->
+  <main class="container products-section" id="products">
+    <h2 class="section-title">Nuestras Gorras</h2>
+
+    <div class="products-grid">
+      <article class="product-card" data-category="ajustables">
+        <img loading="lazy" src="https://images.unsplash.com/photo-1588850561407-ed78c282e89b?ixlib=rb-4.0.3&auto=format&fit=crop&w=736&q=80"
+             alt="Gorra Negra Clásica" class="product-img">
+        <div class="product-info">
+          <h3 class="product-title">Gorra Negra Clásica</h3>
+          <div class="product-rating" aria-label="4.5 de 5 estrellas">
+            <i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star-half-alt" aria-hidden="true"></i>
+          </div>
+          <div class="product-price" data-price="299">$299 <span class="original-price">$499</span></div>
+          <button class="add-to-cart" data-id="1" type="button">Añadir al carrito</button>
         </div>
-        
-        <div class="cart-items">
-            <!-- Ejemplo de item en el carrito -->
-            <div class="cart-item">
-                <img src="https://images.unsplash.com/photo-1588850561407-ed78c282e89b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=736&q=80" alt="Gorra Negra Clásica" class="cart-item-img">
-                <div class="cart-item-info">
-                    <h4>Gorra Negra Clásica</h4>
-                    <div class="cart-item-price">$299</div>
-                    <div class="cart-item-actions">
-                        <button class="decrease-qty">-</button>
-                        <span>1</span>
-                        <button class="increase-qty">+</button>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="cart-item">
-                <img src="https://images.unsplash.com/photo-1576871337632-b9aef4c17ab9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Gorra Roja Deportiva" class="cart-item-img">
-                <div class="cart-item-info">
-                    <h4>Gorra Roja Deportiva</h4>
-                    <div class="cart-item-price">$349</div>
-                    <div class="cart-item-actions">
-                        <button class="decrease-qty">-</button>
-                        <span>1</span>
-                        <button class="increase-qty">+</button>
-                    </div>
-                </div>
-            </div>
+      </article>
+
+      <article class="product-card" data-category="deportivas">
+        <img loading="lazy" src="https://images.unsplash.com/photo-1576871337632-b9aef4c17ab9?ixlib=rb-4.0.3&auto=format&fit=crop&w=687&q=80"
+             alt="Gorra Roja Deportiva" class="product-img">
+        <div class="product-info">
+          <h3 class="product-title">Gorra Roja Deportiva</h3>
+          <div class="product-rating" aria-label="4 de 5 estrellas">
+            <i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="far fa-star" aria-hidden="true"></i>
+          </div>
+          <div class="product-price" data-price="349">$349 <span class="original-price">$549</span></div>
+          <button class="add-to-cart" data-id="2" type="button">Añadir al carrito</button>
         </div>
-        
-        <div class="cart-total">
-            <span>Total:</span>
-            <span>$648</span>
+      </article>
+
+      <article class="product-card" data-category="snapback">
+        <img loading="lazy" src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?ixlib=rb-4.0.3&auto=format&fit=crop&w=687&q=80"
+             alt="Gorra Azul Snapback" class="product-img">
+        <div class="product-info">
+          <h3 class="product-title">Gorra Azul Snapback</h3>
+          <div class="product-rating" aria-label="5 de 5 estrellas">
+            <i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i>
+          </div>
+          <div class="product-price" data-price="399">$399</div>
+          <button class="add-to-cart" data-id="3" type="button">Añadir al carrito</button>
         </div>
-        
-        <button class="btn checkout-btn">Proceder al Pago</button>
+      </article>
+
+      <article class="product-card" data-category="ajustables">
+        <img loading="lazy" src="https://images.unsplash.com/photo-1588850561407-ed78c282e89b?ixlib=rb-4.0.3&auto=format&fit=crop&w=736&q=80"
+             alt="Gorra Verde Militar" class="product-img">
+        <div class="product-info">
+          <h3 class="product-title">Gorra Verde Militar</h3>
+          <div class="product-rating" aria-label="3.5 de 5 estrellas">
+            <i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star-half-alt" aria-hidden="true"></i><i class="far fa-star" aria-hidden="true"></i>
+          </div>
+          <div class="product-price" data-price="279">$279 <span class="original-price">$399</span></div>
+          <button class="add-to-cart" data-id="4" type="button">Añadir al carrito</button>
+        </div>
+      </article>
+
+      <article class="product-card" data-category="deportivas">
+        <img loading="lazy" src="https://images.unsplash.com/photo-1576871337632-b9aef4c17ab9?ixlib=rb-4.0.3&auto=format&fit=crop&w=687&q=80"
+             alt="Gorra Beisbolera Negra" class="product-img">
+        <div class="product-info">
+          <h3 class="product-title">Gorra Beisbolera Negra</h3>
+          <div class="product-rating" aria-label="4 de 5 estrellas">
+            <i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="far fa-star" aria-hidden="true"></i>
+          </div>
+          <div class="product-price" data-price="449">$449</div>
+          <button class="add-to-cart" data-id="5" type="button">Añadir al carrito</button>
+        </div>
+      </article>
+
+      <article class="product-card" data-category="newera">
+        <img loading="lazy" src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?ixlib=rb-4.0.3&auto=format&fit=crop&w=687&q=80"
+             alt="Gorra Blanca con Logo" class="product-img">
+        <div class="product-info">
+          <h3 class="product-title">Gorra Blanca con Logo</h3>
+          <div class="product-rating" aria-label="4.5 de 5 estrellas">
+            <i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star-half-alt" aria-hidden="true"></i>
+          </div>
+          <div class="product-price" data-price="329">$329 <span class="original-price">$449</span></div>
+          <button class="add-to-cart" data-id="6" type="button">Añadir al carrito</button>
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <!-- Ofertas -->
+  <section class="special-offers" id="ofertas">
+    <div class="container offer-content">
+      <h2>¡Hasta 50% de descuento en gorras seleccionadas!</h2>
+      <p>No te pierdas nuestras ofertas especiales. Por tiempo limitado, obtén descuentos increíbles en las mejores marcas de gorras. Oferta válida hasta agotar existencias.</p>
+      <a href="#products" class="btn">Ver Ofertas</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer id="contacto">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-column">
+          <h3>Gorras Estilo</h3>
+          <p>Tu tienda online de gorras con las mejores marcas y diseños. Envíos a todo México.</p>
+          <div class="social-icons" aria-label="Redes sociales">
+            <a href="https://www.instagram.com/gc0shop" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+              <i class="fab fa-instagram" aria-hidden="true"></i>
+            </a>
+            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
+            <a href="#" aria-label="Twitter"><i class="fab fa-twitter" aria-hidden="true"></i></a>
+            <a href="#" aria-label="TikTok"><i class="fab fa-tiktok" aria-hidden="true"></i></a>
+          </div>
+        </div>
+
+        <div class="footer-column">
+          <h3>Categorías</h3>
+          <ul>
+            <li><a href="#">Gorras Deportivas</a></li>
+            <li><a href="#">Gorras Ajustables</a></li>
+            <li><a href="#">Gorras Snapback</a></li>
+            <li><a href="#">Gorras Plana</a></li>
+            <li><a href="#">Gorras New Era</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h3>Ayuda</h3>
+          <ul>
+            <li><a href="#">Preguntas Frecuentes</a></li>
+            <li><a href="#">Envíos y Entregas</a></li>
+            <li><a href="#">Devoluciones</a></li>
+            <li><a href="#">Guía de Tallas</a></li>
+            <li><a href="#">Contacto</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h3>Contacto</h3>
+          <ul>
+            <li><i class="fas fa-map-marker-alt" aria-hidden="true"></i> Av. Insurgentes 123, CDMX</li>
+            <li><i class="fas fa-phone" aria-hidden="true"></i> (55) 1234-5678</li>
+            <li><i class="fas fa-envelope" aria-hidden="true"></i> info@gc0shop.com</li>
+            <li><i class="fas fa-clock" aria-hidden="true"></i> Lunes a Viernes: 9am - 7pm</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="copyright">
+        <p>&copy; 2026 gc0shop.com Todos los derechos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Carrito -->
+  <aside class="cart-modal" id="cart-modal" role="dialog" aria-modal="true" aria-label="Carrito">
+    <div class="cart-header">
+      <h3>Tu Carrito</h3>
+      <button class="close-cart icon-btn" type="button" id="close-cart" aria-label="Cerrar carrito">
+        <i class="fas fa-times" aria-hidden="true"></i>
+      </button>
     </div>
 
-    <script>
-        // Funcionalidad del carrito
-        const cartIcon = document.getElementById('cart-icon');
-        const cartModal = document.getElementById('cart-modal');
-        const closeCart = document.getElementById('close-cart');
-        const addToCartButtons = document.querySelectorAll('.add-to-cart');
-        const cartCount = document.querySelector('.cart-count');
-        const filterOptions = document.querySelectorAll('.filter-option');
-        
-        // Abrir/cerrar carrito
-        cartIcon.addEventListener('click', () => {
-            cartModal.classList.add('active');
-        });
-        
-        closeCart.addEventListener('click', () => {
-            cartModal.classList.remove('active');
-        });
-        
-        // Cerrar carrito al hacer clic fuera
-        document.addEventListener('click', (e) => {
-            if (!cartModal.contains(e.target) && e.target !== cartIcon && !cartIcon.contains(e.target)) {
-                cartModal.classList.remove('active');
-            }
-        });
-        
-        // Añadir productos al carrito
-        addToCartButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                const productId = this.getAttribute('data-id');
-                const productCard = this.closest('.product-card');
-                const productTitle = productCard.querySelector('.product-title').textContent;
-                const productPrice = productCard.querySelector('.product-price').textContent.split(' ')[0];
-                const productImg = productCard.querySelector('.product-img').src;
-                
-                // Actualizar contador del carrito
-                let currentCount = parseInt(cartCount.textContent);
-                cartCount.textContent = currentCount + 1;
-                
-                // Mostrar notificación
-                alert(`${productTitle} añadido al carrito!`);
-                
-                // Abrir carrito
-                cartModal.classList.add('active');
-            });
-        });
-        
-        // Filtrar productos
-        filterOptions.forEach(option => {
-            option.addEventListener('click', function() {
-                // Remover clase activa de todas las opciones
-                filterOptions.forEach(opt => opt.classList.remove('active'));
-                
-                // Añadir clase activa a la opción seleccionada
-                this.classList.add('active');
-                
-                // Aquí normalmente se filtrarían los productos
-                // Por simplicidad, solo mostramos un mensaje
-                const filterText = this.textContent;
-                alert(`Mostrando gorras de categoría: ${filterText}`);
-            });
-        });
-        
-        // Funcionalidad de cantidad en el carrito
-        const decreaseButtons = document.querySelectorAll('.decrease-qty');
-        const increaseButtons = document.querySelectorAll('.increase-qty');
-        
-        decreaseButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                const quantityElement = this.nextElementSibling;
-                let quantity = parseInt(quantityElement.textContent);
-                
-                if (quantity > 1) {
-                    quantityElement.textContent = quantity - 1;
-                    updateCartTotal();
-                }
-            });
-        });
-        
-        increaseButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                const quantityElement = this.previousElementSibling;
-                let quantity = parseInt(quantityElement.textContent);
-                
-                quantityElement.textContent = quantity + 1;
-                updateCartTotal();
-            });
-        });
-        
-        // Actualizar total del carrito
-        function updateCartTotal() {
-            const cartItems = document.querySelectorAll('.cart-item');
-            let total = 0;
-            
-            cartItems.forEach(item => {
-                const priceElement = item.querySelector('.cart-item-price');
-                const quantityElement = item.querySelector('.cart-item-actions span');
-                
-                // Extraer solo el número del precio (eliminando el símbolo $)
-                const price = parseFloat(priceElement.textContent.replace('$', ''));
-                const quantity = parseInt(quantityElement.textContent);
-                
-                total += price * quantity;
-            });
-            
-            // Actualizar total en la interfaz
-            const totalElement = document.querySelector('.cart-total span:last-child');
-            totalElement.textContent = `$${total}`;
-        }
-        
-        // Menú móvil
-        const menuToggle = document.querySelector('.menu-toggle');
-        const navLinks = document.querySelector('.nav-links');
-        
-        menuToggle.addEventListener('click', () => {
-            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
-        });
-        
-        // Ajustar menú en cambio de tamaño de ventana
-        window.addEventListener('resize', () => {
-            if (window.innerWidth > 992) {
-                navLinks.style.display = 'flex';
-            } else {
-                navLinks.style.display = 'none';
-            }
-        });
-    </script>
+    <div class="cart-items" id="cart-items"></div>
+
+    <div class="cart-total">
+      <span>Total:</span>
+      <span id="cart-total">$0</span>
+    </div>
+
+    <button class="btn checkout-btn" type="button">Proceder al Pago</button>
+  </aside>
+
+  <!-- Overlay + Toast -->
+  <div class="overlay" id="overlay" hidden></div>
+  <div class="toast" id="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+
+  <script src="./app.js" defer></script>
 </body>
 </html>
