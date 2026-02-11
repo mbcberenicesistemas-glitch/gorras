@@ -217,3 +217,12 @@ footer{background:var(--dark);color:#fff;padding:52px 0 26px}
     max-width:200px;
   }
 }
+
+.x-icon{
+  width:20px;
+  height:20px;
+  fill: currentColor; /* hereda el color del link */
+  display:block;
+}
+
+
