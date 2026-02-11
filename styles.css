@@ -21,7 +21,7 @@ img{max-width:100%;display:block}
 .site-header{
   background:var(--dark);
   color:#fff;
-  padding:10px 0; /* ajustado para logo más grande */
+  padding:10px 0;
   position:sticky;top:0;z-index:100;
   box-shadow:0 4px 12px rgba(0,0,0,.10);
 }
@@ -41,12 +41,12 @@ img{max-width:100%;display:block}
   object-fit:contain;
 }
 
-/* ✅ Logo ancho (GC0SHOP) - más grande */
+/* Logo ancho (GC0SHOP) - grande */
 .brand-logo--wide{
-  height:72px;        /* ✅ más grande en escritorio */
+  height:72px;
   width:auto;
-  max-width:280px;    /* ✅ evita invadir el menú */
-  border-radius:0;    /* no recortar PNG */
+  max-width:280px;
+  border-radius:0;
 }
 
 /* Si todavía tienes el texto en el HTML, lo ocultamos */
@@ -137,23 +137,31 @@ footer{background:var(--dark);color:#fff;padding:52px 0 26px}
 .footer-column ul li a{color:#ccc;text-decoration:none;transition:color .2s}
 .footer-column ul li a:hover{color:var(--brand)}
 
-/* ✅ Social icons alineados (incluye SVG de X) */
+/* Social icons (desde cero: sin subrayados/“marcas”) */
 .social-icons{
   display:flex;
-  align-items:center;     /* centra vertical */
+  align-items:center;
   gap:14px;
   margin-top:14px;
-}
-.social-icons a{
-  color:#fff;
-  font-size:20px;
-  transition:color .2s;
-  display:inline-flex;    /* alinea iconos */
-  align-items:center;
-  justify-content:center;
   line-height:1;
 }
+.social-icons a{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  color:#fff;
+  text-decoration:none;     /* ✅ evita líneas */
+  border:0;                 /* ✅ evita bordes */
+  outline:0;                /* ✅ evita outlines raros */
+  background:transparent;   /* ✅ nada debajo */
+  box-shadow:none;          /* ✅ nada debajo */
+  line-height:1;
+  padding:0;                /* ✅ sin “marcas” por padding */
+  transition:color .2s;
+}
 .social-icons a:hover{color:var(--brand)}
+.social-icons i{display:block; line-height:1;}
+.social-icons svg{display:block; line-height:1;}
 
 .copyright{text-align:center;padding-top:22px;border-top:1px solid #333;color:#999;font-size:14px}
 
@@ -195,7 +203,6 @@ footer{background:var(--dark);color:#fff;padding:52px 0 26px}
   .menu-toggle{display:inline-flex}
   .site-nav{justify-content:flex-end}
 
-  /* ✅ Logo grande en tablet */
   .brand-logo--wide{
     height:60px;
     max-width:230px;
@@ -225,7 +232,6 @@ footer{background:var(--dark);color:#fff;padding:52px 0 26px}
   .product-img{height:220px}
 }
 
-/* ✅ Logo grande en celular */
 @media (max-width: 420px){
   .icon-btn{width:42px;height:42px}
   .brand-logo--wide{
@@ -234,11 +240,11 @@ footer{background:var(--dark);color:#fff;padding:52px 0 26px}
   }
 }
 
-/* ✅ SVG del icono X alineado con los demás */
+/* SVG del icono X alineado con los demás */
 .x-icon{
   width:20px;
   height:20px;
-  fill: currentColor;  /* hereda el color del link */
+  fill: currentColor;
   display:block;
-  transform: translateY(1px); /* baja 1px para alineación visual */
+  transform: translateY(1px);
 }
