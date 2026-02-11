@@ -21,6 +21,7 @@
   let toastTimer = null;
 
   function toast(msg) {
+    if (!toastEl) return;
     toastEl.textContent = msg;
     toastEl.classList.add("show");
     clearTimeout(toastTimer);
@@ -30,7 +31,7 @@
   function showOverlay() { overlay.hidden = false; }
   function hideOverlay() { overlay.hidden = true; }
 
-  // ----- Menú móvil -----
+  // Menú móvil
   function setMenuOpen(open) {
     navLinks.classList.toggle("open", open);
     menuToggle.setAttribute("aria-expanded", String(open));
@@ -43,10 +44,11 @@
   });
 
   navLinks.addEventListener("click", (e) => {
-    if (e.target.closest("a") && window.innerWidth <= 992) setMenuOpen(false);
+    const a = e.target.closest("a");
+    if (a && window.innerWidth <= 992) setMenuOpen(false);
   });
 
-  // ----- Carrito (estado simple) -----
+  // Carrito
   const cart = new Map(); // id -> {id,title,price,img,qty}
 
   function openCart() {
@@ -162,7 +164,7 @@
     });
   });
 
-  // ----- Filtros -----
+  // Filtros
   function setActiveFilter(activeBtn) {
     filterBtns.forEach((b) => {
       const active = b === activeBtn;
