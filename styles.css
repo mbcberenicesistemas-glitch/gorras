@@ -32,15 +32,24 @@ img{max-width:100%;display:block}
   align-items:center;
   gap:12px;
   text-decoration:none;
+  min-width: 160px;
 }
+
+/* Base logo */
 .brand-logo{
-  width:52px;   /* LOGO MÁS GRANDE */
-  height:52px;
-  border-radius:12px;
+  display:block;
   object-fit:contain;
 }
-.brand-text{font-size:24px;font-weight:800;color:var(--brand);letter-spacing:.3px}
-.brand-text span{color:#fff}
+
+/* ✅ Logo ancho (GC0SHOP) */
+.brand-logo--wide{
+  height:44px;     /* súbelo a 52px si lo quieres más grande */
+  width:auto;
+  border-radius:0; /* no recortar el PNG */
+}
+
+/* Si todavía tienes el texto en el HTML, lo ocultamos */
+.brand-text{display:none;}
 
 .site-nav{flex:1;display:flex;justify-content:center}
 .nav-links{display:flex;list-style:none;gap:22px;align-items:center}
@@ -168,10 +177,17 @@ footer{background:var(--dark);color:#fff;padding:52px 0 26px}
 @media (max-width: 992px){
   .menu-toggle{display:inline-flex}
   .site-nav{justify-content:flex-end}
+
+  /* ✅ top consistente con header */
   .nav-links{
-    position:fixed;top:72px;left:0;right:0;background:var(--dark);
+    position:fixed;
+    top:72px;
+    left:0;right:0;
+    background:var(--dark);
     padding:14px 5%;
-    display:none;flex-direction:column;gap:10px;
+    display:none;
+    flex-direction:column;
+    gap:10px;
     border-top:1px solid rgba(255,255,255,.08);
     z-index:950;
   }
@@ -187,8 +203,8 @@ footer{background:var(--dark);color:#fff;padding:52px 0 26px}
   .product-img{height:220px}
 }
 
+/* ✅ Logo responsive */
 @media (max-width: 420px){
-  .brand-text{font-size:20px}
   .icon-btn{width:42px;height:42px}
-  .brand-logo{width:46px;height:46px;}
+  .brand-logo--wide{height:36px}
 }
