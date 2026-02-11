@@ -21,7 +21,7 @@ img{max-width:100%;display:block}
 .site-header{
   background:var(--dark);
   color:#fff;
-  padding:14px 0;
+  padding:10px 0; /* ajustado para logo más grande */
   position:sticky;top:0;z-index:100;
   box-shadow:0 4px 12px rgba(0,0,0,.10);
 }
@@ -32,7 +32,7 @@ img{max-width:100%;display:block}
   align-items:center;
   gap:12px;
   text-decoration:none;
-  min-width: 160px;
+  min-width:160px;
 }
 
 /* Base logo */
@@ -41,11 +41,12 @@ img{max-width:100%;display:block}
   object-fit:contain;
 }
 
-/* ✅ Logo ancho (GC0SHOP) */
+/* ✅ Logo ancho (GC0SHOP) - más grande */
 .brand-logo--wide{
-  height:44px;     /* súbelo a 52px si lo quieres más grande */
+  height:72px;        /* ✅ más grande en escritorio */
   width:auto;
-  border-radius:0; /* no recortar el PNG */
+  max-width:280px;    /* ✅ evita invadir el menú */
+  border-radius:0;    /* no recortar PNG */
 }
 
 /* Si todavía tienes el texto en el HTML, lo ocultamos */
@@ -178,7 +179,12 @@ footer{background:var(--dark);color:#fff;padding:52px 0 26px}
   .menu-toggle{display:inline-flex}
   .site-nav{justify-content:flex-end}
 
-  /* ✅ top consistente con header */
+  /* ✅ Logo grande en tablet */
+  .brand-logo--wide{
+    height:60px;
+    max-width:230px;
+  }
+
   .nav-links{
     position:fixed;
     top:72px;
@@ -203,8 +209,11 @@ footer{background:var(--dark);color:#fff;padding:52px 0 26px}
   .product-img{height:220px}
 }
 
-/* ✅ Logo responsive */
+/* ✅ Logo grande en celular */
 @media (max-width: 420px){
   .icon-btn{width:42px;height:42px}
-  .brand-logo--wide{height:36px}
+  .brand-logo--wide{
+    height:52px;
+    max-width:200px;
+  }
 }
